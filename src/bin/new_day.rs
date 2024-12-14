@@ -1,11 +1,11 @@
 use std::env;
-use std::fs::File;
+use std::fs::OpenOptions;
 use std::io::prelude::*;
 
 fn main() -> std::io::Result<()> {
     for argument in env::args().skip(1) {
         let f = format!("./src/bin/day{}.rs", argument);
-        let mut file = File::create(f)?;
+        let mut file = OpenOptions::new().write(true).create_new(true).open(f)?;
         let content = format!(
             "use rust::{{day{}a, day{}b}};
 
